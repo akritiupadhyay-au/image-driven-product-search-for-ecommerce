@@ -16,7 +16,7 @@ client.create_collection(
 )
 
 # Set temporary directory globally
-tempfile.tempdir = "/home/akriti/Notebooks/fashion-product-images-dataset/fashion-dataset/fashion-dataset/images"
+tempfile.tempdir = "./fashion-product-images-dataset/fashion-dataset/fashion-dataset/images"
 
 # Initialize tokenizer, processor, and model
 model_name = "openai/clip-vit-base-patch32"
