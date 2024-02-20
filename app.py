@@ -8,6 +8,8 @@ from qdrant_client.http import models
 import tempfile
 import os
 from tqdm import tqdm
+import opendatasets as od
+od.download("https://www.kaggle.com/datasets/vikashrajluhaniwal/fashion-images")
 
 client = QdrantClient(":memory:")
 collection_name = "Products"
@@ -16,7 +18,7 @@ client.create_collection(
    vectors_config=models.VectorParams(size=512, distance=models.Distance.COSINE),
 )
 
-tempfile.tempdir = "/home/akriti/Notebooks/fashion-images/data"
+tempfile.tempdir = "./fashion-images/data"
 
 model_name = "openai/clip-vit-base-patch32"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -35,10 +37,10 @@ def process_directory(directory):
             image_list.append(img)
 
 # Process directories
-process_directory("/home/akriti/Notebooks/fashion-images/data/Apparel_Boys/Images/images_with_product_ids/")
-process_directory("/home/akriti/Notebooks/fashion-images/data/Apparel_Girls/Images/images_with_product_ids/")
-process_directory("/home/akriti/Notebooks/fashion-images/data/Footwear_Men/Images/images_with_product_ids/")
-process_directory("/home/akriti/Notebooks/fashion-images/data/Footwear_Women/Images/images_with_product_ids/")
+process_directory("./fashion-images/data/Apparel_Boys/Images/images_with_product_ids/")
+process_directory("./fashion-images/data/Apparel_Girls/Images/images_with_product_ids/")
+process_directory("./fashion-images/data/Footwear_Men/Images/images_with_product_ids/")
+process_directory("./fashion-images/data/Footwear_Women/Images/images_with_product_ids/")
 
 records = []
 for idx, sample in tqdm(enumerate(image_list), total=len(image_list)):
@@ -85,7 +87,7 @@ def get_images_from_category(category):
     # Convert category to string
     category_str = str(category)
     # Directory path for selected category
-    category_dir = f"/home/akriti/Notebooks/fashion-images/data/{category_str.replace(' ', '_')}/Images/images_with_product_ids/"
+    category_dir = f"./fashion-images/data/{category_str.replace(' ', '_')}/Images/images_with_product_ids/"
     # List of image paths
     image_paths = os.listdir(category_dir)[:5]
     # Open and return images
@@ -119,8 +121,8 @@ image_search_interface = gr.Interface(
     outputs=gr.Image(),
     title="Image-driven Product Search for Ecommerce",
     description="Upload an image to perform a reverse image search from the collection.",
-    examples=[["/home/akriti/Notebooks/fashion-images/data/Apparel_Boys/Images/images_with_product_ids/2691.jpg"],["/home/akriti/Notebooks/fashion-images/data/Apparel_Girls/Images/images_with_product_ids/2697.jpg"],
-               ["/home/akriti/Notebooks/fashion-images/data/Footwear_Men/Images/images_with_product_ids/1636.jpg"],["/home/akriti/Notebooks/fashion-images/data/Footwear_Women/Images/images_with_product_ids/2610.jpg"]],
+    examples=[["./fashion-images/data/Apparel_Boys/Images/images_with_product_ids/2691.jpg"],["./fashion-images/data/Apparel_Girls/Images/images_with_product_ids/2697.jpg"],
+               ["./fashion-images/data/Footwear_Men/Images/images_with_product_ids/1636.jpg"],["./fashion-images/data/Footwear_Women/Images/images_with_product_ids/2610.jpg"]],
 )
 
 category_search_interface = gr.Interface(
