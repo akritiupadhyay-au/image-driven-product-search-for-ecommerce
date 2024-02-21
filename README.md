@@ -11,5 +11,11 @@ There are two Gradio Interfaces:
 2. Image Search using Product Category
    
 You'll see the running application in two tabs.
-Tab 0: 
+
+**Tab 0:** ![](assets/Tab1.jpg)
+**Tab 1:** ![](assets/Tab0.jpg)
+
+Try a reverse image search by uploading an image and getting images of the products from the selected product categories.
+For more details, visit my medium [article]()
+The Running version of this application can be seen on [Hugging Face Space]()
 
