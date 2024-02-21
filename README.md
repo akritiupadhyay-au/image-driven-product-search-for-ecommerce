@@ -17,5 +17,5 @@ You'll see the running application in two tabs.
 
 Try a reverse image search by uploading an image and getting images of the products from the selected product categories.
 For more details, visit my medium [article]()
-The Running version of this application can be seen on [Hugging Face Space]()
+The Running version of this application can be seen on [Hugging Face Space](https://huggingface.co/spaces/akritiupadhyay/image_driven_product_search_for_ecommerce)
 
